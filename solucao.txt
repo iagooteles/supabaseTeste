@@ -1,0 +1,103 @@
+public abstract class Funcionario {
+    private String nome;
+    private int idade;
+    private double salarioBase;
+
+    public Funcionario(String nome, int idade, double salarioBase) {
+        this.nome = nome;
+        this.idade = idade;
+        this.salarioBase = salarioBase;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public double getSalarioBase() {
+        return salarioBase;
+    }
+
+    public abstract double calcularSalarioTotal();
+}
+
+
+public class Gerente extends Funcionario {
+    private double bonus;
+
+    public Gerente(String nome, int idade, double salarioBase, double bonus) {
+        super(nome, idade, salarioBase);
+        this.bonus = bonus;
+    }
+
+    public double getBonus() {
+        return bonus;
+    }
+
+    @Override
+    public double calcularSalarioTotal() {
+        return getSalarioBase() + bonus;
+    }
+}
+
+
+public class Desenvolvedor extends Funcionario {
+    private String nivel;
+
+    public Desenvolvedor(String nome, int idade, double salarioBase, String nivel) {
+        super(nome, idade, salarioBase);
+        this.nivel = nivel;
+    }
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    @Override
+    public double calcularSalarioTotal() {
+        switch (nivel.toLowerCase()) {
+            case "júnior":
+                return getSalarioBase() + 500;
+            case "pleno":
+                return getSalarioBase() + 1000;
+            case "sênior":
+                return getSalarioBase() + 2000;
+            default:
+                return getSalarioBase(); // caso nível seja inválido
+        }
+    }
+}
+
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+
+        funcionarios.add(new Gerente("Ana", 40, 5000, 2000));
+        funcionarios.add(new Desenvolvedor("Bruno", 25, 3000, "Júnior"));
+        funcionarios.add(new Desenvolvedor("Carla", 30, 4000, "Sênior"));
+        funcionarios.add(new Gerente("Daniel", 45, 6000, 2500));
+
+        int qtdGerentes = 0;
+        int qtdDesenvolvedores = 0;
+
+        System.out.println("Salários Totais dos Funcionários:");
+        for (Funcionario f : funcionarios) {
+            System.out.println(f.getNome() + " - R$ " + f.calcularSalarioTotal());
+
+            if (f instanceof Gerente) {
+                qtdGerentes++;
+            } else if (f instanceof Desenvolvedor) {
+                qtdDesenvolvedores++;
+            }
+        }
+
+        System.out.println("\nQuantidade de Gerentes: " + qtdGerentes);
+        System.out.println("Quantidade de Desenvolvedores: " + qtdDesenvolvedores);
+    }
+}
+
