@@ -1,0 +1,28 @@
+Crie uma classe abstrata chamada Funcionario. Todo funcionário tem um nome, uma idade e um salário base. Siga as regras de encapsulamento.
+
+Crie dois tipos de funcionários:
+
+Gerente (é um Funcionário): além dos atributos herdados, possui um bônus de desempenho (double).
+
+Desenvolvedor (também é um Funcionário): possui um atributo nível (String) que pode ser "Júnior", "Pleno" ou "Sênior".
+
+Na classe Funcionario, defina um método abstrato chamado calcularSalarioTotal(), que será implementado por cada tipo de funcionário de forma diferente:
+
+Para o Gerente, o salário total é: salário base + bônus.
+
+Para o Desenvolvedor, o salário total varia com o nível:
+
+"Júnior" → salário base + 500
+
+"Pleno" → salário base + 1000
+
+"Sênior" → salário base + 2000
+
+Na classe principal:
+
+Instancie um objeto do tipo Gerente e um do tipo Desenvolvedor.
+
+Use o polimorfismo para criar um vetor de Funcionario com pelo menos 4 elementos (misturando gerentes e desenvolvedores).
+
+Imprima o salário total de cada funcionário do vetor, utilizando o método calcularSalarioTotal().
+
